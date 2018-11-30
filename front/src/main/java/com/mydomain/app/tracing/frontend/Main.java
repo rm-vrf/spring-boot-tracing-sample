@@ -10,12 +10,12 @@ import org.springframework.web.client.RestTemplate;
 public class Main {
 
 	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.setConnectTimeout(10000).setReadTimeout(10000).build();
+	public RestTemplate getRestTemplate(RestTemplateBuilder builder) {
+		return builder.setReadTimeout(10000).setConnectTimeout(10000).build();
 	}
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
-	
+
 }

@@ -9,9 +9,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>frontend</module>
-		<module>backend</module>
 		<module>gateway</module>
+		<module>front</module>
+		<module>back</module>
 	</modules>
 	
 </project>
