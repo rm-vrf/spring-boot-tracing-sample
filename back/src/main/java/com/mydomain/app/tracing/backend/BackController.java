@@ -1,9 +1,13 @@
 package com.mydomain.app.tracing.backend;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +18,9 @@ public class BackController {
 	private static final Logger LOG = LoggerFactory.getLogger(BackController.class);
 
 	private static final int SEED = 3000;
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@RequestMapping(value = "/back/api/v1/test", method = RequestMethod.GET)
 	public String test() throws Exception {
@@ -31,7 +38,10 @@ public class BackController {
 
 	@RequestMapping(value = "/back/api/v1/test2", method = RequestMethod.GET)
 	public String test2() throws Exception {
-		return "test2";
+		String sql = "SELECT Host, User FROM user";
+		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
+
+		return list.toString();
 	}
 
 }
