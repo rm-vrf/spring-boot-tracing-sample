@@ -1,0 +1,11 @@
+FROM openjdk:8
+
+RUN mkdir -p /opt/stack
+
+ADD back/target/tracing-sample-back-1.0.0-SNAPSHOT.jar /opt/stack/
+
+WORKDIR /opt/stack
+
+ENTRYPOINT ["java", \
+    "-jar", \
+    "tracing-sample-back-1.0.0-SNAPSHOT.jar"]

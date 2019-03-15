@@ -1,0 +1,11 @@
+FROM openjdk:8
+
+RUN mkdir -p /opt/stack
+
+ADD gateway/target/tracing-sample-gateway-1.0.0-SNAPSHOT.jar /opt/stack/
+
+WORKDIR /opt/stack
+
+ENTRYPOINT ["java", \
+    "-jar", \
+    "tracing-sample-gateway-1.0.0-SNAPSHOT.jar"]
