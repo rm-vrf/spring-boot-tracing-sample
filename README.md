@@ -26,7 +26,7 @@ https://dl.bintray.com/openzipkin/maven/io/zipkin/java/zipkin-server/
 Zipkin 自带 InMemory 存储。实际使用一定要采用外部存储，可以使用 Elasticsearch 或者 MySQL。Elasticsearch 更适合大规模使用，启动命令：
 
 ```
-java -jar zipkin-server-2.11.8-exec.jar --STORAGE_TYPE=elasticsearch \
+$ java -jar zipkin-server-2.11.8-exec.jar --STORAGE_TYPE=elasticsearch \
     --ES_HOSTS=localhost:9200
 ```
 
@@ -95,21 +95,28 @@ spring.datasource.url=jdbc:mysql://localhost:3306/mysql?useSSL=false&statementIn
 程序打包：
 
 ```shell
-mvn package
+$ mvn package
 ```
 
 运行程序：
 
 ```shell
-java -jar gateway/target/tracing-sample-gateway-1.0.0-SNAPSHOT.jar
+$ java -jar gateway/target/tracing-sample-gateway-1.0.0-SNAPSHOT.jar
 
-java -jar front/target/tracing-sample-front-1.0.0-SNAPSHOT.jar \
+$ java -jar front/target/tracing-sample-front-1.0.0-SNAPSHOT.jar \
     --back.url=http://localhost:8082
 
-java -jar back/target/tracing-sample-back-1.0.0-SNAPSHOT.jar
+$ java -jar back/target/tracing-sample-back-1.0.0-SNAPSHOT.jar
 ```
 
 > `front` 程序直接访问 `back` 端口，不使用网关。网关一般只用在集群的入口位置，提供给外界用户调用。在集群内部要提供某种服务发现机制，进程之间直接访问，尽量减少调用环节，降低延时。大量采用网关会带来单点故障的风险，甚至造成雪崩效应。
+
+或者用 Docker 方式运行：
+
+```shell
+$ cd docker/
+$ docker-compose up
+```
 
 验证一下程序的功能：
 

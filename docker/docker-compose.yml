@@ -76,9 +76,7 @@ services:
       - mysql
 
   zipkin:
-    build:
-      context: ../
-      dockerfile: docker/dockerfile-zipkin
+    image: openzipkin/zipkin:2.12.6
     container_name: zipkin
     ports:
       - "9411:9411"
